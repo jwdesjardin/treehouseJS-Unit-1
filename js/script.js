@@ -18,22 +18,19 @@ const quotes = [
     source: 'Ralph Waldo Emerson'
   },
   {
-    quote: `Be tolerant with others and strict with yourself.”
-    `,
+    quote: `Be tolerant with others and strict with yourself.”`,
     source: 'Marcus Aurelius',
     tags: 'Stoicism'
   },
   {
-    quote: `In your actions, don’t procrastinate. In your conversations, don’t confuse. In your thoughts, don’t wander. In your soul, don’t be passive or aggressive. In your life, don’t be all about business.”
-    `,
+    quote: `In your actions, don’t procrastinate. In your conversations, don’t confuse. In your thoughts, don’t wander. In your soul, don’t be passive or aggressive. In your life, don’t be all about business.”`,
     source: 'Marcus Aurelius',
     citation: 'Meditations',
     year: '161 - 180 A.D.',
     tags: 'Stoicism'
   },
   {
-    quote: `Waste no more time arguing what a good <em>person</em> should be. Be One.”
-    `,
+    quote: `Waste no more time arguing what a good <em>person</em> should be. Be One.”`,
     source: 'Marcus Aurelius',
     citation: 'Meditations',
     year: '161 - 180 A.D.',
@@ -62,7 +59,7 @@ const printQuote = () => {
   let htmlString = `<p class='quote'>${quote.quote}</p>
                     <p class='source'>${quote.source}`;
 
-  // add citation or year if it is included                  
+  // add optional quote data if it is included                  
   if(quote.citation){
     htmlString += `<span class='citation'>${quote.citation}</span>`
   }
@@ -85,16 +82,18 @@ const printQuote = () => {
 
 //FUNCTION sets body background color to random color
 const randomBackgroundColor = () => {
+  // generate three random numbers between 0-255
   const r = Math.floor(Math.random() * 256);
   const g = Math.floor(Math.random() * 256);
   const b = Math.floor(Math.random() * 256);
+  //set the backgroundColor of the body to color using random values
   document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
 };
 
 // listen for click event at the element with id 'load-quote'
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
-//call our functions every 10000 ms or 10 sec
+//call printQuote every 10000 ms or 10 sec
 setInterval(() => {
   printQuote();
 }, 10000);
