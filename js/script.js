@@ -3,9 +3,8 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// hard-coded data descibing quotes 
+// DATA -- array of quote objects
 const quotes = [
-
   {
     quote: `The impediment to action advances action. What stands in the way becomes the way`,
     source: 'Marcus Aurelius',
@@ -40,17 +39,17 @@ const quotes = [
 
 
 
-// FUNCTION - returns a random element from quotes array
+// FUNCTION returns a random quote from quotes array
 const getRandomQuote = () => {
-  // get random index from quote array
+  // get random index 
   const random = Math.floor(Math.random() * (quotes.length));
 
-  //return the quote at this random index
+  // return the quote at that index
   return quotes[random];
 }
 
 
-//FUNCTION - Create new html AND update the value of the 'quote-box' element
+//FUNCTION Create new html AND update the value of the 'quote-box' element
 const printQuote = () => {
   //get random quote from our hard-coded array
   const quote = getRandomQuote();
@@ -90,7 +89,7 @@ const randomBackgroundColor = () => {
   document.body.style.backgroundColor = `rgb(${r},${g},${b})`;
 };
 
-// listen for click event at the element with id 'load-quote'
+// EVENT - listen for click event at the element with id 'load-quote'
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
 //call printQuote every 10000 ms or 10 sec
