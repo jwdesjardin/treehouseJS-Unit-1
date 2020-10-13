@@ -38,21 +38,55 @@ const quotes = [
 ];
 
 
+// fill an array with a number for each index present 
+let indexes = [];
+  for (let i = 0; i < quotes.length; i++){
+    indexes[i] = i;
+  }
 
-// FUNCTION returns a random quote from quotes array
+// FUNCTION returns a random quote from quotes array - does not repeat
 const getRandomQuote = () => {
-  // get random index 
-  const random = Math.floor(Math.random() * (quotes.length));
-
-  // return the quote at that index
-  return quotes[random];
+  // check in everything in indexes is null
+  if (!indexes.every(n => n === null)){
+    //find random index that is still in indexes array
+    let random;
+      do {
+        random = Math.floor(Math.random() * (quotes.length));
+      } while (!indexes.includes(random));
+      // once found set index to null and return
+      indexes[random] = null;
+      return quotes[random];
+    // if NULL  
+  } else {
+    //reset array
+    for (let i = 0; i < quotes.length; i++){
+      indexes[i] = i;
+    }
+    // return the call again with new values of index
+    return getRandomQuote();
+  }
 }
 
 
+let var1;
 //FUNCTION Create new html AND update the value of the 'quote-box' element
 const printQuote = () => {
+  //clear any intervals already set 
+  clearInterval(var1);
+  // change quote and background color once
+  displayQuote(getRandomQuote());
+  randomBackgroundColor();
+  // set to repeat actions every 10 seconds
+  var1 = setInterval(() => {
+    displayQuote(getRandomQuote());
+    randomBackgroundColor();
+  }, 10000);
+}
+
+
+const displayQuote = (quote) => {
   //get random quote from our hard-coded array
-  const quote = getRandomQuote();
+  
  
   // insert required quote data into htmlString 
   let htmlString = `<p class='quote'>${quote.quote}</p>
@@ -75,8 +109,6 @@ const printQuote = () => {
   // set the value of the quote-box element to our new html
   document.getElementById('quote-box').innerHTML = htmlString;
 
-  //change the background to a random color 
-  randomBackgroundColor();
 }
 
 //FUNCTION sets body background color to random color
@@ -92,10 +124,9 @@ const randomBackgroundColor = () => {
 // EVENT - listen for click event at the element with id 'load-quote'
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
 
-//call printQuote every 10000 ms or 10 sec
-setInterval(() => {
-  printQuote();
-}, 10000);
+
+//displays first quote and sets interval when page loads
+printQuote();
 
 
 
